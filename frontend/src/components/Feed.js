@@ -1,10 +1,8 @@
-// Feed component - shows posts and allows creating new posts
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API_BASE_URL from "../config/api";
 
 function Feed({ user }) {
-  // State for posts and new post form
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [loading, setLoading] = useState(true);
@@ -14,7 +12,6 @@ function Feed({ user }) {
   const [editContent, setEditContent] = useState("");
   const [updating, setUpdating] = useState(false);
 
-  // Function to get authentication headers
   const getAuthHeaders = () => {
     const token = localStorage.getItem("token");
     return {
@@ -24,7 +21,6 @@ function Feed({ user }) {
     };
   };
 
-  // Function to fetch all posts
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -41,12 +37,9 @@ function Feed({ user }) {
     }
   };
 
-  // Fetch posts when component loads
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  // Function to handle creating a new post
   const handleCreatePost = async (e) => {
     e.preventDefault();
 
@@ -59,14 +52,12 @@ function Feed({ user }) {
       setPosting(true);
       setError("");
 
-      // Send new post to backend
       await axios.post(
         `${API_BASE_URL}/api/posts`,
         { content: newPost },
         getAuthHeaders()
       );
 
-      // Clear the input and refresh posts
       setNewPost("");
       await fetchPosts();
     } catch (error) {
@@ -77,7 +68,6 @@ function Feed({ user }) {
     }
   };
 
-  // Function to handle editing a post
   const handleEditPost = async (postId) => {
     if (!editContent.trim()) {
       setError("Please write something to post");
@@ -88,14 +78,12 @@ function Feed({ user }) {
       setUpdating(true);
       setError("");
 
-      // Send edit request to backend
       await axios.put(
         `${API_BASE_URL}/api/posts/${postId}`,
         { content: editContent },
         getAuthHeaders()
       );
 
-      // Reset editing state and refresh posts
       setEditingPost(null);
       setEditContent("");
       await fetchPosts();
@@ -107,7 +95,6 @@ function Feed({ user }) {
     }
   };
 
-  // Function to handle deleting a post
   const handleDeletePost = async (postId) => {
     if (!window.confirm("Are you sure you want to delete this post?")) {
       return;
@@ -116,13 +103,11 @@ function Feed({ user }) {
     try {
       setError("");
 
-      // Send delete request to backend
       await axios.delete(
         `${API_BASE_URL}/api/posts/${postId}`,
         getAuthHeaders()
       );
 
-      // Refresh posts
       await fetchPosts();
     } catch (error) {
       console.error("Error deleting post:", error);
@@ -130,24 +115,19 @@ function Feed({ user }) {
     }
   };
 
-  // Function to start editing a post
   const startEditing = (post) => {
     setEditingPost(post._id);
     setEditContent(post.content);
   };
 
-  // Function to cancel editing
   const cancelEditing = () => {
     setEditingPost(null);
     setEditContent("");
   };
 
-  // Function to check if current user owns a post
   const isPostOwner = (post) => {
     return user && post.author === user.id;
   };
-
-  // Function to format date nicely
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return (

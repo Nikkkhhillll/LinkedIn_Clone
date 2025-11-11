@@ -1,11 +1,9 @@
-// Login component - handles user login
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import API_BASE_URL from "../config/api";
 
 function Login({ onLogin }) {
-  // State for form inputs
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,7 +11,6 @@ function Login({ onLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,23 +18,19 @@ function Login({ onLogin }) {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      // Send login request to backend
       const response = await axios.post(
         `${API_BASE_URL}/api/auth/login`,
         formData
       );
 
-      // If successful, call onLogin function from App component
       onLogin(response.data.token, response.data.user);
     } catch (error) {
-      // Show error message if login fails
       setError(
         error.response?.data?.message || "Login failed. Please try again."
       );

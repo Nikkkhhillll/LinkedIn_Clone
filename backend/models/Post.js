@@ -1,28 +1,24 @@
-// Post model - defines how posts are stored in MongoDB
 const mongoose = require("mongoose");
 
-// Define the structure of post data
 const postSchema = new mongoose.Schema(
   {
     content: {
       type: String,
-      required: true, // Post content is required
+      required: true,
       trim: true,
     },
     author: {
-      type: mongoose.Schema.Types.ObjectId, // References a User ID
-      ref: "User", // Links to User model
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     authorName: {
       type: String,
-      required: true, // Store author name for easy display
+      required: true,
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
-
-// Create and export the Post model
 module.exports = mongoose.model("Post", postSchema);

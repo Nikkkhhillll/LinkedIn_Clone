@@ -1,11 +1,9 @@
-// Signup component - handles user registration
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import API_BASE_URL from "../config/api";
 
 function Signup({ onLogin }) {
-  // State for form inputs
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +12,6 @@ function Signup({ onLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,23 +19,19 @@ function Signup({ onLogin }) {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      // Send signup request to backend
       const response = await axios.post(
         `${API_BASE_URL}/api/auth/signup`,
         formData
       );
 
-      // If successful, automatically log the user in
       onLogin(response.data.token, response.data.user);
     } catch (error) {
-      // Show error message if signup fails
       setError(
         error.response?.data?.message || "Signup failed. Please try again."
       );
