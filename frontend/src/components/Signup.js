@@ -1,8 +1,8 @@
 // Signup component - handles user registration
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import API_BASE_URL from '../config/api';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import API_BASE_URL from "../config/api";
 
 function Signup({ onLogin }) {
   // State for form inputs
@@ -30,7 +30,10 @@ function Signup({ onLogin }) {
 
     try {
       // Send signup request to backend
-      const response = await axios.post(`${API_BASE_URL}/api/auth/signup`, formData);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/auth/signup`,
+        formData
+      );
 
       // If successful, automatically log the user in
       onLogin(response.data.token, response.data.user);

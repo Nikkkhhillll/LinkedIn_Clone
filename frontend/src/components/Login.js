@@ -1,8 +1,8 @@
 // Login component - handles user login
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import API_BASE_URL from '../config/api';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import API_BASE_URL from "../config/api";
 
 function Login({ onLogin }) {
   // State for form inputs
@@ -29,7 +29,10 @@ function Login({ onLogin }) {
 
     try {
       // Send login request to backend
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/auth/login`,
+        formData
+      );
 
       // If successful, call onLogin function from App component
       onLogin(response.data.token, response.data.user);

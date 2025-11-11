@@ -277,7 +277,10 @@ body {
   gap: 8px;
 }
 
-.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
   padding: 4px 8px;
   border: none;
   border-radius: 4px;
@@ -323,7 +326,9 @@ body {
   background-color: #424242;
 }
 
-.edit-btn:disabled, .save-btn:disabled, .cancel-btn:disabled {
+.edit-btn:disabled,
+.save-btn:disabled,
+.cancel-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
@@ -360,16 +365,16 @@ body {
   .container {
     padding: 10px;
   }
-  
+
   .auth-container {
     padding: 20px;
     margin-top: 20px;
   }
-  
+
   .header-content {
     padding: 0 10px;
   }
-  
+
   .form-title {
     font-size: 24px;
   }
@@ -389,7 +394,8 @@ body {
     width: 100%;
   }
 
-  .save-btn, .cancel-btn {
+  .save-btn,
+  .cancel-btn {
     width: 100%;
   }
 }

@@ -28,7 +28,10 @@ function Feed({ user }) {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/api/posts`, getAuthHeaders());
+      const response = await axios.get(
+        `${API_BASE_URL}/api/posts`,
+        getAuthHeaders()
+      );
       setPosts(response.data.posts);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -57,7 +60,11 @@ function Feed({ user }) {
       setError("");
 
       // Send new post to backend
-      await axios.post(`${API_BASE_URL}/api/posts`, { content: newPost }, getAuthHeaders());
+      await axios.post(
+        `${API_BASE_URL}/api/posts`,
+        { content: newPost },
+        getAuthHeaders()
+      );
 
       // Clear the input and refresh posts
       setNewPost("");
@@ -110,7 +117,10 @@ function Feed({ user }) {
       setError("");
 
       // Send delete request to backend
-      await axios.delete(`${API_BASE_URL}/api/posts/${postId}`, getAuthHeaders());
+      await axios.delete(
+        `${API_BASE_URL}/api/posts/${postId}`,
+        getAuthHeaders()
+      );
 
       // Refresh posts
       await fetchPosts();
@@ -194,9 +204,11 @@ function Feed({ user }) {
               <div className="post-header">
                 <div className="post-info">
                   <span className="post-author">{post.authorName}</span>
-                  <span className="post-date">{formatDate(post.createdAt)}</span>
+                  <span className="post-date">
+                    {formatDate(post.createdAt)}
+                  </span>
                 </div>
-                
+
                 {/* Show edit/delete buttons only for post owner */}
                 {isPostOwner(post) && (
                   <div className="post-actions">

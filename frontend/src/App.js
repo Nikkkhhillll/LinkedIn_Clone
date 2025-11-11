@@ -61,7 +61,9 @@ function App() {
           {/* If user is logged in, show Feed. If not, redirect to login */}
           <Route
             path="/"
-            element={isAuthenticated ? <Feed user={user} /> : <Navigate to="/login" />}
+            element={
+              isAuthenticated ? <Feed user={user} /> : <Navigate to="/login" />
+            }
           />
 
           {/* Login page - redirect to feed if already logged in */}
